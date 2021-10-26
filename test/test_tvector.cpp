@@ -136,26 +136,38 @@ TEST(TVector, vectors_with_different_size_are_not_equal)
 
 TEST(TVector, can_add_scalar_to_vector)
 {
-	TVector<int> a(8);
-	ASSERT_NO_THROW(a=a+5);
+	TVector<int> a(8), b(8);
+	for (int i = 0; i < 8; i++)
+		b[i] = a[i] + 5;
+	ASSERT_NO_THROW(a+5);
+	EXPECT_EQ(b, a + 5);
 }
 
 TEST(TVector, can_subtract_scalar_from_vector)
 {
-	TVector<int> a(8);
-	ASSERT_NO_THROW(a=a - 5);
+	TVector<int> a(8),b(8);
+	for (int i = 0; i < 8; i++)
+		b[i] = a[i] - 5;
+	ASSERT_NO_THROW(a - 5);
+	EXPECT_EQ(b, a - 5);
 }
 
 TEST(TVector, can_multiply_scalar_by_vector)
 {
-	TVector<int> a(8);
-	ASSERT_NO_THROW(a=a*5);
+	TVector<int> a(8), b(8);
+	for (int i = 0; i < 8; i++)
+		b[i] = a[i]* 5;
+	ASSERT_NO_THROW(a*5);
+	EXPECT_EQ(b,a*5);
 }
 
 TEST(TVector, can_add_vectors_with_equal_size)
 {
-	TVector<int> a(8),b(8);
-	ASSERT_NO_THROW(a=a + b);
+	TVector<int> a(8),b(8),c(8);
+	for (int i = 0; i < 8; i++)
+		c[i] = a[i] + b[i];
+	ASSERT_NO_THROW(a + b);
+	EXPECT_EQ(c, a + b);
 }
 
 TEST(TVector, cant_add_vectors_with_not_equal_size)
@@ -166,8 +178,11 @@ TEST(TVector, cant_add_vectors_with_not_equal_size)
 
 TEST(TVector, can_subtract_vectors_with_equal_size)
 {
-	TVector<int> a(6), b(6);
+	TVector<int> a(6), b(6), c(6);
+	for (int i = 0; i < 6; i++)
+		c[i] = a[i] - b[i];
 	ASSERT_NO_THROW(a - b);
+	EXPECT_EQ(c, a - b);
 }
 
 TEST(TVector, cant_subtract_vectors_with_not_equal_size)
@@ -179,7 +194,11 @@ TEST(TVector, cant_subtract_vectors_with_not_equal_size)
 TEST(TVector, can_multiply_vectors_with_equal_size)
 {
 	TVector<int> a(6), b(6);
+	for (int i = 0; i < 6; i++)
+		a[i] = i, b[i] = i+1;
+	//a*b=0*1+1*2+2*3+3*4+4*5+5*6=2+6+12+20+30=70
 	ASSERT_NO_THROW(a * b);
+	EXPECT_EQ(70, a*b);
 }
 
 TEST(TVector, cant_multiply_vectors_with_not_equal_size)

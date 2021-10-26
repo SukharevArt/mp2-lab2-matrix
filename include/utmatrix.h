@@ -196,7 +196,7 @@ ValType TVector<ValType>::operator*(const TVector<ValType> &v)
         throw "DS";
     ValType s=0;
     for (int i = 0; i < Size; i++)
-        s = s + pVector[i] + v.pVector[i];
+        s = s + pVector[i] * v.pVector[i];
     return s;
 } /*-------------------------------------------------------------------------*/
 
